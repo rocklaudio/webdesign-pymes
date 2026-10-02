@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barberia Kings of Style — La Cisterna</title>
+<meta name="description" content="Cortes, barba y estilo en el corazón de La Cisterna">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#c19a3e;
+    --accent-hi:color-mix(in srgb, var(--accent) 82%, white);
+    --bg:#0e0d0b; --bg2:#16140f; --panel:#1a1712;
+    --ink:#f4efe6; --body:#c6bfb1; --muted:#8f877a;
+    --line:#2b261d;
+    --maxw:1160px; --r:14px;
+    --shadow:0 24px 60px -24px rgba(0,0,0,.7);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--body);
+       font-family:'Inter',system-ui,sans-serif;font-size:16px;line-height:1.6;
+       -webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:'Bebas Neue',Impact,'Arial Narrow',sans-serif;color:var(--ink);
+           font-weight:400;text-transform:uppercase;letter-spacing:.01em;line-height:.95;margin:0}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
+           color:var(--accent-hi);font-weight:600}
+  /* Top bar */
+  .topbar{background:#0a0908;color:var(--muted);font-size:.8rem;border-bottom:1px solid var(--line)}
+  .topbar .wrap{display:flex;justify-content:space-between;gap:14px;padding:8px 24px;flex-wrap:wrap}
+  .topbar a{color:var(--ink)}
+  /* Nav */
+  header{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 82%,transparent);
+         backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 0}
+  .nav .left{display:flex;align-items:center;gap:12px}
+  .nav .right{display:flex;align-items:center;gap:10px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:'Bebas Neue',sans-serif;
+         font-size:1.5rem;letter-spacing:.05em;color:var(--ink);text-transform:uppercase}
+  .mono{width:40px;height:40px;border-radius:8px;background:var(--accent);color:#14110b;display:grid;
+        place-items:center;font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.03em}
+  .btn{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#14110b;padding:13px 22px;
+       border-radius:8px;font-weight:700;font-size:.9rem;letter-spacing:.02em;text-transform:uppercase;
+       border:none;cursor:pointer;transition:transform .16s ease,filter .16s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  .btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+  .btn.ghost:hover{border-color:var(--accent-hi)}
+  .btn.icon{padding:12px 14px}
+  /* Hero full-screen */
+  .hero{position:relative;overflow:hidden;min-height:min(80vh,720px);display:grid;align-items:center;
+        padding:clamp(72px,10vw,140px) 0;
+        background:
+          radial-gradient(120% 90% at 85% 10%, color-mix(in srgb,var(--accent) 22%, transparent) 0%, transparent 55%),
+          var(--bg)}
+  .hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.62}
+  .hero-overlay{position:absolute;inset:0;background:
+      linear-gradient(180deg, rgba(14,13,11,.28) 0%, rgba(14,13,11,.5) 55%, rgba(14,13,11,.82) 100%),
+      linear-gradient(90deg, rgba(14,13,11,.72) 0%, rgba(14,13,11,.2) 72%)}
+  .hero-wm{position:absolute;right:-4%;bottom:-14%;font-family:'Bebas Neue',sans-serif;font-size:30vw;line-height:.8;
+           color:rgba(255,255,255,.05);pointer-events:none;user-select:none;z-index:1}
+  .hero-inner{position:relative;z-index:2}
+  .hero h1{font-size:clamp(3.4rem,10vw,8rem);margin:16px 0 20px}
+  .hero .lead{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--body);max-width:38ch;margin-bottom:34px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  /* Marquee */
+  .band-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+              background:var(--bg2);padding:18px 0;overflow:hidden}
+  .track{display:flex;width:max-content;animation:marquee 24s linear infinite}
+  .group{display:flex;align-items:center;flex-shrink:0;font-family:'Bebas Neue',sans-serif;
+         font-size:1.5rem;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+  .group span{display:inline-flex;align-items:center}
+  .group span::after{content:"✦";margin:0 44px;color:var(--accent)}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  /* About strip */
+  .about{padding:clamp(48px,7vw,84px) 0}
+  .about p{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.1;
+           color:var(--ink);max-width:46ch;margin:0;letter-spacing:.01em}
+  /* Sections */
+  section{padding:clamp(56px,8vw,100px) 0}
+  .head{margin-bottom:clamp(30px,4vw,48px)}
+  .head h2{font-size:clamp(2.2rem,5vw,3.6rem);margin:8px 0 10px}
+  .head p{color:var(--muted);max-width:56ch;margin:0}
+  /* Services */
+  .svc{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+  .svc .card{display:grid;grid-template-columns:auto 1fr;gap:8px 20px;align-items:center;
+             padding:24px 0;border-top:1px solid var(--line)}
+  .svc .ico{width:52px;height:52px;border-radius:12px;background:color-mix(in srgb,var(--accent) 14%, transparent);
+            display:grid;place-items:center;font-size:1.5rem;line-height:1;font-family:'Inter',sans-serif}
+  .svc h3{font-size:1.9rem;letter-spacing:.02em}
+  .svc p{margin:0;color:var(--muted);font-size:.95rem;grid-column:2}
+  .svc .card.featured{background:color-mix(in srgb,var(--accent) 10%, transparent);
+        border:1px solid color-mix(in srgb,var(--accent) 50%, transparent);
+        border-radius:var(--r);padding:20px;margin:6px 0}
+  .svc .card.featured h3{color:var(--accent-hi)}
+  .badge{display:inline-block;margin-left:10px;font-family:'Inter',sans-serif;font-size:.6rem;font-weight:700;
+         letter-spacing:.12em;text-transform:uppercase;background:var(--accent);color:#14110b;
+         padding:4px 9px;border-radius:999px;vertical-align:middle}
+  /* Reviews carousel */
+  .reviews{position:relative}
+  .reviews-viewport{overflow:hidden}
+  .reviews-track{display:flex;transition:transform .55s ease}
+  .rev{flex:0 0 33.3333%;padding:0 12px}
+  .rev .rev-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;margin-bottom:14px}
+  .rev .rev-stars{color:var(--accent);letter-spacing:2px;font-size:.9rem;margin-bottom:10px}
+  .rev p{color:var(--body);font-size:.98rem;line-height:1.55;margin:0 0 14px;max-width:40ch}
+  .rev .rev-name{color:var(--ink);font-weight:600;font-size:.9rem;letter-spacing:.02em}
+  .reviews-nav{display:flex;gap:10px;justify-content:flex-end;margin-top:24px}
+  .rev-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:transparent;
+           color:var(--ink);font-size:1.4rem;cursor:pointer;display:grid;place-items:center;
+           transition:border-color .2s ease,color .2s ease}
+  .rev-btn:hover{border-color:var(--accent-hi);color:var(--accent-hi)}
+  /* Gallery */
+  .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));grid-auto-rows:200px;gap:12px}
+  .gal-item{overflow:hidden;border-radius:var(--r);background:var(--panel)}
+  .gal-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+  .gal-item:hover img{transform:scale(1.06)}
+  .gal-item:first-child{grid-column:span 2;grid-row:span 2}
+  /* Info */
+  .info{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+        padding:clamp(32px,5vw,56px)}
+  .info h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:26px}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:28px}
+  .info .k{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-hi);
+           font-weight:600;margin-bottom:8px}
+  .info .v{color:var(--ink);font-weight:500;font-size:1.02rem}
+  .info a{color:var(--ink)}
+  .info .btn{margin-top:14px}
+  /* CTA band */
+  .band{text-align:center;padding:clamp(64px,10vw,120px) 0}
+  .band h2{font-size:clamp(2.4rem,6vw,4.6rem);margin:14px 0 18px}
+  .band p{color:var(--body);max-width:42ch;margin:0 auto 32px}
+  /* Footer */
+  footer{background:#0a0908;color:var(--muted);padding:44px 0 30px;font-size:.9rem;border-top:1px solid var(--line)}
+  footer .wrap{display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between;align-items:baseline}
+  footer strong{font-family:'Bebas Neue',sans-serif;color:var(--ink);font-size:1.4rem;letter-spacing:.03em}
+  footer a{color:var(--ink)}
+  .disc{font-size:.74rem;color:#6f675a;margin-top:22px;border-top:1px solid #262219;padding-top:16px}
+  /* Float + watermark */
+  .wa{position:fixed;right:20px;bottom:20px;z-index:40;background:#25D366;color:#fff;width:58px;height:58px;
+      border-radius:50%;display:grid;place-items:center;font-size:1.6rem;box-shadow:0 10px 26px rgba(37,211,102,.4)}
+  .ig{position:fixed;right:20px;bottom:92px;z-index:40;width:58px;height:58px;border-radius:50%;
+      display:grid;place-items:center;font-size:1.5rem;color:#fff;
+      background:radial-gradient(circle at 30% 110%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+      box-shadow:0 10px 26px rgba(0,0,0,.4)}
+  .wm{position:fixed;left:16px;bottom:16px;z-index:35;background:rgba(14,13,11,.9);color:var(--ink);font-size:.7rem;
+      font-weight:600;padding:8px 14px;border-radius:999px;letter-spacing:.04em;border:1px solid var(--line)}
+  /* Reveal */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+    .track{animation:none}
+    html{scroll-behavior:auto}
+  }
+  @media (max-width:820px){
+    .hero{min-height:0;padding:clamp(56px,14vw,96px) 0}
+    .hero h1{font-size:clamp(2.6rem,13vw,4rem)}
+    .nav{flex-wrap:wrap;gap:12px}
+    .nav .left{min-width:0}
+    .brand{font-size:1.25rem}
+    .btn{padding:11px 16px;font-size:.8rem}
+    .nav .right .ghost.icon{display:none}
+    .rev{flex:0 0 100%}
+    .svc{grid-template-columns:1fr}
+    .badge{margin-left:0;margin-top:8px;display:table}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <span>📍 Av. Lo Ovalle 955, 7980029 La Cisterna, Región Metropolitana</span>
+    <span>📞 <a href="tel:+56936760458">+56 9 3676 0458</a></span>
+  </div>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <div class="left">
+      <div class="brand"><span class="mono">BK</span> Barberia Kings of Style</div>
+    </div>
+    <div class="right">
+      <a class="btn ghost icon" href="https://instagram.com/barberiakings.cl" target="_blank" rel="noopener" aria-label="Instagram">📷 Instagram</a>
+      <a class="btn" href="tel:+56936760458">Reservar / Llamar</a>
+    </div>
+  </div>
+</header>
+
+<div class="hero">
+  <img class="hero-img" src="assets/hero.jpg" alt="Barberia Kings of Style" loading="eager" onerror="this.remove()">
+  <div class="hero-overlay"></div>
+  <span class="hero-wm" aria-hidden="true">BK</span>
+  <div class="wrap hero-inner reveal">
+    <span class="eyebrow">📍 La Cisterna</span>
+    <h1>Barberia Kings of Style</h1>
+    <p class="lead">Cortes, barba y estilo en el corazón de La Cisterna</p>
+    <div class="cta">
+      <a class="btn" href="https://wa.me/56936760458" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+      <a class="btn ghost" href="tel:+56936760458">📞 Llamar</a>
+    </div>
+  </div>
+</div>
+
+<div class="band-strip" aria-hidden="true">
+  <div class="track">
+    <div class="group"><span>Corte de cabello</span><span>Perfilado de barba</span><span>Limpieza facial</span><span>Afeitado a navaja</span><span>Masaje capilar</span><span>Experiencia Kings</span></div>
+    <div class="group"><span>Corte de cabello</span><span>Perfilado de barba</span><span>Limpieza facial</span><span>Afeitado a navaja</span><span>Masaje capilar</span><span>Experiencia Kings</span></div>
+  </div>
+</div>
+
+<div class="about">
+  <div class="wrap"><p class="reveal">Barbería de barrio con identidad propia: cortes precisos, barba cuidada y una atención que te hace volver.</p></div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Lo que hacemos</h2>
+      <p>El detalle marca la diferencia. Elige tu servicio y agenda en minutos.</p>
+    </div>
+    <div class="svc"><div class="card"><div class="ico">✂️</div><h3>Corte de cabello</h3><p>Corte clásico o moderno, según tu estilo, con acabado a navaja.</p></div>
+      <div class="card"><div class="ico">🪒</div><h3>Perfilado de barba</h3><p>Perfilado con toallas calientes y tónicos para el cuidado de la barba.</p></div>
+      <div class="card"><div class="ico">🧼</div><h3>Limpieza facial</h3><p>Limpieza profunda para el rostro: purifica, hidrata y cuida.</p></div>
+      <div class="card"><div class="ico">💈</div><h3>Afeitado a navaja</h3><p>Afeitado clásico con navaja, toalla caliente y tónico.</p></div>
+      <div class="card"><div class="ico">💆</div><h3>Masaje capilar</h3><p>Masajes y tratamientos para cuidar y proteger tu cabello.</p></div>
+      <div class="card featured"><div class="ico">👑</div><h3>Experiencia Kings<span class="badge">Más completo</span></h3><p>Corte + perfilado + cejas + masaje premium + limpieza premium. Todo en una sesión.</p></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Galería</span><h2>Nuestro trabajo</h2></div>
+    <div class="gallery reveal"><div class="gal-item"><img src="assets/interior-wide.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="gal-item"><img src="assets/grooming-close.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="gal-item"><img src="assets/grooming-profile.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="gal-item"><img src="assets/interior-right.jpg" alt="" loading="lazy" onerror="this.remove()"></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Reseñas</span>
+      <h2>Lo que dicen</h2>
+    </div>
+    <div class="reviews reveal">
+      <div class="reviews-viewport">
+        <div class="reviews-track"><div class="rev"><img class="rev-avatar" src="https://randomuser.me/api/portraits/men/32.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="rev-stars">★★★★★</div><p>“Llevo 3 años cortándome acá y nunca me han dejado mal. La barba la dejan impecable.”</p><div class="rev-name">Cristóbal M.</div></div>
+<div class="rev"><img class="rev-avatar" src="https://randomuser.me/api/portraits/men/45.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="rev-stars">★★★★★</div><p>“Fui sin hora un sábado y me atendieron altiro. Buen ambiente, buena música, cortes de otro nivel.”</p><div class="rev-name">Matías R.</div></div>
+<div class="rev"><img class="rev-avatar" src="https://randomuser.me/api/portraits/women/44.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="rev-stars">★★★★★</div><p>“Le regalé el corte a mi pololo y quedó encantado. Local limpio y atención muy buena.”</p><div class="rev-name">Javiera S.</div></div>
+<div class="rev"><img class="rev-avatar" src="https://randomuser.me/api/portraits/men/75.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="rev-stars">★★★★★</div><p>“La limpieza facial más el corte te dejan otro. Vale cada peso, recomendado.”</p><div class="rev-name">Diego P.</div></div>
+<div class="rev"><img class="rev-avatar" src="https://randomuser.me/api/portraits/men/65.jpg" alt="" loading="lazy" onerror="this.remove()"><div class="rev-stars">★★★★★</div><p>“Se nota que saben lo que hacen. El detalle con la navaja es otra cosa. 100% recomendado.”</p><div class="rev-name">Fabián C.</div></div></div>
+      </div>
+      <div class="reviews-nav">
+        <button class="rev-btn rev-prev" aria-label="Anterior">‹</button>
+        <button class="rev-btn rev-next" aria-label="Siguiente">›</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="info reveal">
+      <h2>Visítanos</h2>
+      <div class="info-grid">
+        <div><div class="k">Dirección</div><div class="v">Av. Lo Ovalle 955, 7980029 La Cisterna, Región Metropolitana</div>
+          <a class="btn ghost" href="https://www.google.com/maps/place/Barberia+Kings+of+Style/data=!4m7!3m6!1s0x9662db53e0611bf3:0x7062168365dd99d4!8m2!3d-33.5168836!4d-70.6476021!16s%2Fg%2F11wwsmn363!19sChIJ8xth4FPbYpYR1JndZYMWYnA?authuser=0&amp;hl=es&amp;g_ep=EgoyMDI2MDkwOS4wIJJjKgBIAVAD&amp;rclk=1" target="_blank" rel="noopener">🗺️ Ver mapa</a></div>
+        <div><div class="k">Horario</div><div class="v">Lun a Dom 9:00 – 21:00</div></div>
+        <div><div class="k">Contacto</div><div class="v"><a href="tel:+56936760458">+56 9 3676 0458</a></div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="band">
+  <div class="wrap reveal">
+    <span class="eyebrow">Te esperamos</span>
+    <h2>Agenda tu corte</h2>
+    <p>Escríbenos y coordinamos en minutos.</p>
+    <div class="cta" style="justify-content:center">
+      <a class="btn" href="https://wa.me/56936760458" target="_blank" rel="noopener">Reservar por WhatsApp</a>
+      <a class="btn ghost" href="tel:+56936760458">📞 Llamar</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div><strong>Barberia Kings of Style</strong><br>Av. Lo Ovalle 955, 7980029 La Cisterna, Región Metropolitana · La Cisterna</div>
+    <div><a href="tel:+56936760458">📞 +56 9 3676 0458</a></div>
+  </div>
+  <div class="wrap"><p class="disc">Sitio de demostración creado como propuesta no solicitada. No es el sitio oficial del negocio. · © 2026 Barberia Kings of Style</p></div>
+</footer>
+
+<a class="wa" href="https://wa.me/56936760458" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<a class="ig" href="https://instagram.com/barberiakings.cl" target="_blank" rel="noopener" aria-label="Instagram">📷</a>
+<div class="wm">🔧 DEMO · sitio de muestra</div>
+
+<script>
+  // Reveal on scroll
+  const els = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: .12 });
+    els.forEach(el => io.observe(el));
+  } else { els.forEach(el => el.classList.add('in')); }
+
+  // Reviews carousel
+  (function () {
+    const track = document.querySelector('.reviews-track');
+    const prev = document.querySelector('.rev-prev');
+    const next = document.querySelector('.rev-next');
+    if (!track || !prev || !next) return;
+    const cards = Array.from(track.children);
+    let i = 0;
+    const perView = () => (window.innerWidth <= 820 ? 1 : 3);
+    const max = () => Math.max(0, cards.length - perView());
+    function go(n) {
+      i = Math.max(0, Math.min(n, max()));
+      const w = cards[0].getBoundingClientRect().width;
+      track.style.transform = 'translateX(' + (-i * w) + 'px)';
+    }
+    prev.addEventListener('click', () => go(i - 1));
+    next.addEventListener('click', () => go(i + 1));
+    setInterval(() => go(i >= max() ? 0 : i + 1), 4500);
+    window.addEventListener('resize', () => go(i));
+    go(0);
+  })();
+</script>
+</body>
+</html>
