@@ -62,7 +62,7 @@ img {
   align-items: center;
   justify-content: space-between;
   padding: 0 5vw;
-  background: rgba(246, 243, 238, .96);
+  background: #f0eee8;
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(46, 37, 31, .08)
 }
@@ -1194,7 +1194,7 @@ img {
     top: 72px;
     left: 0;
     right: 0;
-    background: #f6f3ee;
+    background: #f0eee8;
     border-bottom: 1px solid rgba(46, 37, 31, .1);
     padding: 18px 7vw 24px;
     display: none;
